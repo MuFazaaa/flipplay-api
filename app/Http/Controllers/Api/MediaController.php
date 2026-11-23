@@ -18,6 +18,7 @@ class MediaController extends Controller
         $media = Media::query()
             ->when($request->query('judul'), fn ($q, $judul) => $q->where('judul', 'like', "%{$judul}%"))
             ->when($request->query('tipe'), fn ($q, $tipe) => $q->where('tipe', $tipe))
+            ->when($request->query('dengan') === 'pengguna', fn ($q) => $q->with('pengguna'))
             ->withCount('pengguna')
             ->orderBy('judul')
             ->paginate(10)

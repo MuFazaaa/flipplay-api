@@ -15,6 +15,6 @@ class PenggunaController extends Controller
 
     public function show(Pengguna $pengguna): PenggunaResource
     {
-        return new PenggunaResource($pengguna->loadCount('koleksi'));
+        return new PenggunaResource($pengguna->load('koleksi')->loadCount('koleksi'));
     }
 }
